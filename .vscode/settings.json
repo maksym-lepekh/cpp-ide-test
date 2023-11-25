@@ -3,7 +3,6 @@
 		"--compile-commands-dir=.clangd-internal",
 		"--background-index=true"
 	],
-	"cmake.allowUnsupportedPresetsVersions": true,
 	"cmake.copyCompileCommands": "${workspaceRoot}/.clangd-internal/compile_commands.json",
 	"files.associations": {
 		"*.cppm": "cpp"

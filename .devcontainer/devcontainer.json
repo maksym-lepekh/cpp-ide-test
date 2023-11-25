@@ -1,15 +1,14 @@
 {
-    "build": {
-      "dockerfile": "Dockerfile"
-    },
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "ms-vscode.cmake-tools",
-          "twxs.cmake",
-          "llvm-vs-code-extensions.vscode-clangd"
-        ]
-      }
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "llvm-vs-code-extensions.vscode-clangd"
+      ]
     }
   }
-  
+}
