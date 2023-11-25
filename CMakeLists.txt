@@ -8,5 +8,6 @@ include(ClangLibcxxModules)
 
 add_executable(ide-test
         main.cpp
+        no_module.cpp
         literals.cpp
         source_loc.cpp)
