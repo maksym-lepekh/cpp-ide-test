@@ -5,7 +5,7 @@ _default: full-rebuild
 
 # build tolchain image
 build-image:
-    docker build .devcontainer -f .devcontainer/Dockerfile -t {{image-name}}
+    docker build .devcontainer -f .devcontainer/Dockerfile.deb -t {{image-name}}
 
 _run *ARGS:
     docker run --rm -it -v `pwd`:/proj -w /proj {{image-name}} {{ARGS}}

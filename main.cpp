@@ -2,5 +2,6 @@ import std;
 
 auto main() -> int
 {
-    std::println("Hello world!");
+    auto arr = std::vector{1, 2, 3, 4};
+    std::println("Hello world, {}!", arr);
 }

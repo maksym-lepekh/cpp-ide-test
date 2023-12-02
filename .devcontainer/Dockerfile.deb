@@ -1,0 +1,34 @@
+FROM ubuntu:mantic
+
+RUN apt update
+RUN apt install -y clang-17 clangd-17 clang-format-17 clang-tidy-17 libc++-17-dev
+RUN apt install -y ninja-build git lldb-17 pkg-config make
+
+# cmake 3.28
+ARG CMAKE_VER="v3.28.0-rc5"
+RUN apt install -y libssl-dev wget
+RUN wget https://gitlab.kitware.com/cmake/cmake/-/archive/${CMAKE_VER}/cmake-${CMAKE_VER}.tar.gz \
+    && tar xzf cmake-${CMAKE_VER}.tar.gz \
+    && cd cmake-${CMAKE_VER}/ \
+    && CC=clang-17 CXX=clang++-17 ./bootstrap --parallel=8 \
+    && make -j \
+    && make install \
+    && cd .. && rm -rf cmake-*
+
+# libc++ with modules
+RUN git clone https://github.com/llvm/llvm-project.git --depth 1 --branch 'release/17.x' \
+    && cd llvm-project \
+    && mkdir build \
+    && CC=clang-17 CXX=clang++-17 cmake -G Ninja -S runtimes -B build \
+    -DLIBCXX_ENABLE_STD_MODULES=ON \
+    -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" \
+    -DCMAKE_BUILD_TYPE=Release \
+    && ninja -C build
+
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-17 90 \
+    --slave /usr/bin/clang clang /usr/bin/clang-17 \
+    --slave /usr/bin/clangd clangd /usr/bin/clangd-17 \
+    --slave /usr/bin/clang-tidy clangd-tidy /usr/bin/clangd--tidy17 \
+    --slave /usr/bin/clang-format clangd-format /usr/bin/clang-format-17
+
+RUN update-alternatives --install /usr/bin/lldb-vscode lldb-vscode /usr/bin/lldb-vscode-17 90
