@@ -1,14 +1,12 @@
 {
   "build": {
-    "dockerfile": "Dockerfile.deb"
+    "dockerfile": "Dockerfile"
   },
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-vscode.cmake-tools",
-        "twxs.cmake",
-        "llvm-vs-code-extensions.vscode-clangd",
-        "vadimcn.vscode-lldb"
+        "llvm-vs-code-extensions.vscode-clangd"
       ]
     }
   }

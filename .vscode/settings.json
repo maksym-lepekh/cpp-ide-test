@@ -1,10 +1,6 @@
 {
 	"clangd.arguments": [
-		"--compile-commands-dir=.clangd-internal",
-		"--background-index=true"
+		"--compile-commands-dir=.vscode/clangd"
 	],
-	"cmake.copyCompileCommands": "${workspaceRoot}/.clangd-internal/compile_commands.json",
-	"files.associations": {
-		"*.cppm": "cpp"
-	}
+	"cmake.copyCompileCommands": "${workspaceRoot}/.vscode/clangd/compile_commands.json"
 }
